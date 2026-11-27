@@ -1,0 +1,64 @@
+# 可用计算环境与软件版本清单（面向被测执行环境）
+# 仅列出已安装的 Conda 环境、版本与权重位置占位符；部署至测评镜像时填充实际绝对路径。
+
+schema_version: "1.0"
+os: "Linux x86_64 (glibc >= 2.28)"
+cuda_major: "<12 | 13>"
+
+conda_environments:
+  rfdscreening-core:
+    python: "3.10.20"
+    packages:
+      - numpy==2.2.6
+      - scipy==1.15.2
+      - pandas==2.3.3
+      - gemmi==0.7.5
+      - biopython==1.88
+      - rdkit==2025.9.6
+      - zstandard==0.25.0
+      - tmtools==0.3.0
+      - dssp (mkdssp)
+      - pyyaml==6.0.3
+      - matplotlib==3.10.9
+      - pillow==12.3.0
+  alphafold3:
+    python: ">=3.12"
+    package: "alphafold3>=3.0.4"
+    weights_path: "<FILL_PATH>/af3.bin.zst"
+    local_full_mmcif_db: false
+  esmfold2:
+    python: "3.12"
+    package: "esm>=3.5.0"
+    model_id: "biohub/ESMFold2"
+    weights_cache: "<FILL_PATH>/hf_cache"
+  SE3nv:
+    python: "3.9"
+    package: "RFdiffusion v1.1.0"
+    repo_path: "<FILL_PATH>/RFdiffusion"
+    weights_path: "<FILL_PATH>/RFdiffusion/models/Complex_base_ckpt.pt"
+  rfd4:
+    python: "3.12"
+    package: "RFD4-Proteina>=0.0.3"
+    repo_path: "<FILL_PATH>/RFD4-Proteina"
+    model_id: "nvidia/RFD4-Proteina"
+    weights_cache: "<FILL_PATH>/hf_cache"
+  bg:
+    python: "3.12"
+    package: "boltzgen>=0.3.2"
+    weights_cache: "<FILL_PATH>/boltzgen_cache"
+  ligandmpnn:
+    python: "3.11"
+    package: "LigandMPNN (main)"
+    repo_path: "<FILL_PATH>/LigandMPNN"
+    weights_dir: "<FILL_PATH>/LigandMPNN/model_params"
+  tmol:
+    python: "3.12"
+    package: "tmol==1.0.0"
+  colabfold:
+    python: "3.13"
+    package: "colabfold[alphafold]==1.6.3"
+    cli_tools: ["mmseqs", "hhblits", "kalign"]
+  mahlool:
+    python: "3.10"
+    package: "peptide-dashboard (sol-rnn Keras model)"
+    repo_path: "<FILL_PATH>/peptide-dashboard"

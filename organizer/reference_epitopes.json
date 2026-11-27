@@ -1,0 +1,115 @@
+{
+  "schema_version": "1.1",
+  "confidential": true,
+  "description": "Private organizer official scoring thresholds and Stage 2 reference epitopes. All stage 2 pass thresholds, epitope hit rules, and endpoint aggregation criteria are kept here and in organizer/rubric.md rather than exposed in workspace/. All listed epitope residues are within <= 5.0 A heavy-atom distance of the reference partner and verified to have single-receptor Shrake-Rupley SASA > 0 (1.4 A probe). Residue numbers match PDB author numbering in workspace/input/targets/*.pdb.",
+  "official_stage2_scoring_thresholds": {
+    "anti_mind_reading_policy": "Do not penalize a submission's report for choosing a reasonable alternative domain threshold (e.g., pLDDT > 75 or RMSD < 2.0 A). Recompute all cross-model comparable endpoints offline from submitted coordinates and per-sample raw metrics using the official thresholds below.",
+    "epitope_precision_rule": "|S intersect R| / |S| >= 0.50",
+    "epitope_hit_rule": {
+      "heavy_atom_distance_angstrom": 5.0,
+      "min_contacted_residues_in_S_intersect_R": 3,
+      "min_fraction_of_all_receptor_contacts_in_S_intersect_R": 0.50,
+      "applies_to": ["relaxed_design_pose", "each_passing_prediction_sample"]
+    },
+    "single_model_pass": {
+      "joint_within_same_sample": true,
+      "plddt_pep_gt": 70.0,
+      "iptm_gt": 0.70,
+      "rmsd_bb_lt_angstrom": 2.5,
+      "must_satisfy_epitope_hit_rule": true
+    },
+    "high_confidence_pass": {
+      "joint_within_same_sample": true,
+      "plddt_pep_gt": 85.0,
+      "iptm_gt": 0.85,
+      "rmsd_bb_lt_angstrom": 2.5,
+      "must_satisfy_epitope_hit_rule": true
+    },
+    "primary_pass_definition": "dual_model_cross_validation_pass (same candidate achieves >= 1 single_model_pass sample in AlphaFold3 AND >= 1 single_model_pass sample in full ESMFold2)",
+    "endpoints": {
+      "target_feasibility": "At least 1 pre-nomination developability-screened fragment-assembly candidate achieves dual_model_cross_validation_pass on each of the 3 targets (IL7Ra, TrkA, PD_L1).",
+      "primary_endpoint": "Equal-weight 3-target mean difference in dual_model_cross_validation_pass rate (fragment assembly minus full-length baseline), denominator = fixed nomination quota (unfilled slots and failed predictions counted as failed).",
+      "secondary_endpoints": [
+        "High-confidence dual-model pass count per target and equal-weight mean",
+        "Median tmol interaction-energy score (Delta E_bind) across all validly scored nominated candidates (plus pass-subset distribution)"
+      ],
+      "explanatory_only": ["Single-chain secondary structure composition", "Pool-level conformational/sequence diversity"]
+    }
+  },
+  "targets": {
+    "IL7Ra": {
+      "target_file": "workspace/input/targets/IL7Ra.pdb",
+      "source_pdb": "3DI3",
+      "receptor_chain": "B",
+      "residue_range": [17, 209],
+      "reference_faces": {
+        "native_il7_interface": {
+          "source": "3DI3 chain B <= 5.0 A from IL-7 chain A (all SASA > 0)",
+          "residues": [31, 33, 57, 58, 59, 77, 78, 79, 80, 81, 82, 83, 102, 104, 138, 139, 191, 192, 193],
+          "core_hotspots": [
+            {"resi": 58, "resn": "VAL"},
+            {"resi": 80, "resn": "LEU"},
+            {"resi": 81, "resn": "LEU"},
+            {"resi": 82, "resn": "ILE"},
+            {"resi": 139, "resn": "TYR"},
+            {"resi": 192, "resn": "TYR"}
+          ],
+          "cross_check_note": "Experimental antagonist complex 7OPB (offset -20 to 3DI3 chain B) contacts B58, B80-84, B102, B104-105, B138-139, B141, B190-194."
+        }
+      }
+    },
+    "TrkA": {
+      "target_file": "workspace/input/targets/TrkA.pdb",
+      "source_pdb": "1WWW",
+      "receptor_chain": "X",
+      "residue_range": [282, 382],
+      "reference_faces": {
+        "native_ngf_interface": {
+          "source": "1WWW chain X <= 5.0 A from beta-NGF chains V/W (all SASA > 0)",
+          "residues": [291, 294, 295, 296, 297, 298, 300, 302, 303, 304, 327, 333, 334, 335, 343, 344, 345, 347, 349, 350, 352, 353, 354, 355, 379, 380, 381, 382],
+          "core_hotspots": [
+            {"resi": 294, "resn": "VAL"},
+            {"resi": 296, "resn": "MET"},
+            {"resi": 297, "resn": "HIS"},
+            {"resi": 302, "resn": "PRO"},
+            {"resi": 303, "resn": "PHE"},
+            {"resi": 333, "resn": "LEU"}
+          ]
+        },
+        "proximal_beta_sheet_blocking_face": {
+          "source": "7N3T chain A <= 5.0 A from antagonist chains C/D mapped to 1WWW chain X (all SASA > 0; steric blocker overlapping NGF site)",
+          "residues": [291, 292, 293, 294, 295, 296, 297, 298, 299, 300, 302, 303, 304, 331, 333, 334, 343, 344, 345, 347, 350],
+          "core_hotspots": [
+            {"resi": 294, "resn": "VAL"},
+            {"resi": 296, "resn": "MET"},
+            {"resi": 297, "resn": "HIS"},
+            {"resi": 302, "resn": "PRO"},
+            {"resi": 303, "resn": "PHE"},
+            {"resi": 333, "resn": "LEU"}
+          ]
+        }
+      }
+    },
+    "PD_L1": {
+      "target_file": "workspace/input/targets/PD_L1.pdb",
+      "source_pdb": "4ZQK",
+      "receptor_chain": "A",
+      "residue_range": [18, 132],
+      "reference_faces": {
+        "native_pd1_interface": {
+          "source": "4ZQK chain A <= 5.0 A from PD-1 chain B (all SASA > 0)",
+          "residues": [18, 19, 20, 23, 26, 54, 56, 58, 63, 66, 76, 113, 115, 117, 119, 120, 121, 122, 123, 124, 125, 126],
+          "core_hotspots": [
+            {"resi": 54, "resn": "ILE"},
+            {"resi": 56, "resn": "TYR"},
+            {"resi": 66, "resn": "GLN"},
+            {"resi": 115, "resn": "MET"},
+            {"resi": 121, "resn": "ALA"},
+            {"resi": 122, "resn": "ASP"},
+            {"resi": 123, "resn": "TYR"}
+          ]
+        }
+      }
+    }
+  }
+}

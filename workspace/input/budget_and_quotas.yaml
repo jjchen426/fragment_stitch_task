@@ -1,0 +1,54 @@
+# 阶段一与阶段二默认配额与计算协议配置（由命题方统一发布）
+# 缩减配额仅采用本文件预先公布的数值，统一适用于全部靶点、方法和参评提交。
+
+schema_version: "1.0"
+
+chemical_scope:
+  length_min: 5
+  length_max: 20
+  topologies:
+    - linear
+    - head_to_tail_cyclic
+  allowed_amino_acids: "ADEFGHIKLMNPQRSTVWY"  # 19 standard L-amino acids (Cys excluded in both arms)
+  excluded_features:
+    - non_canonical_amino_acids
+    - d_amino_acids
+    - sidechain_crosslinks
+    - disulfide_cyclization
+
+stage1:
+  benchmark_complex_count_range: [20, 40]
+  default_fragments_per_epitope: 100
+  backbone_recovery_rmsd_thresholds_angstrom: [1.5, 2.0]
+  epitope_contact_cutoff_angstrom: 5.0
+  min_independent_fragments_per_assembly: 2
+  fixed_epitope_coverage_floor: null  # 不预设硬性覆盖率门槛，由执行者探索并择优选取最优方案
+
+stage2:
+  targets:
+    - IL7Ra
+    - TrkA
+    - PD_L1
+  nominations_per_target_per_arm: 200
+  tmol_relax:
+    internal_coord_scorefxn: "beta_nov_2016"
+    internal_coord_min_iterations: 40
+    cartesian_scorefxn: "beta_nov_2016_cart"
+    cartesian_min_iterations: 200
+  structure_prediction:
+    models:
+      - AlphaFold3
+      - ESMFold2  # full version (not ESMFold2-Fast)
+    seeds_per_candidate_per_model: 3
+    samples_per_seed: 5
+    total_samples_per_candidate_per_model: 15
+
+hardware_budget_template:
+  # 部署到实际测评容器前由运维/命题方填写实际机器数值
+  gpu_model: "<FILL_AT_DEPLOYMENT>"
+  gpu_count: "<FILL_AT_DEPLOYMENT>"
+  gpu_vram_gb_min: 24
+  ram_gb_min: 64
+  disk_available_gb_min: 200
+  wall_time_limit_hours: "<FILL_AT_DEPLOYMENT>"
+  network_access: "<FILL_AT_DEPLOYMENT: online | offline>"

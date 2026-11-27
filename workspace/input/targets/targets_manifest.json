@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "note": "Single-receptor structures for Stage 2 de novo peptide binder design. Native binding partners and solvent molecules have been removed. Residue numbering preserves original PDB author numbering.",
+  "targets": [
+    {
+      "target_id": "IL7Ra",
+      "name": "Human Interleukin-7 Receptor Subunit Alpha (IL-7Rα)",
+      "file": "targets/IL7Ra.pdb",
+      "receptor_chain": "B",
+      "residue_range": "17-209",
+      "num_residues": 193,
+      "biological_objective": "Design de novo linear and head-to-tail cyclic peptide binders (5–20 aa, standard L-amino acids excluding Cys) that block the interaction between IL-7Rα and its native cytokine ligand IL-7."
+    },
+    {
+      "target_id": "TrkA",
+      "name": "Human Tropomyosin Receptor Kinase A (TrkA, Ig-like domain d5)",
+      "file": "targets/TrkA.pdb",
+      "receptor_chain": "X",
+      "residue_range": "282-382",
+      "num_residues": 101,
+      "biological_objective": "Design de novo linear and head-to-tail cyclic peptide binders (5–20 aa, standard L-amino acids excluding Cys) that block the interaction between TrkA and its native neurotrophin ligand β-NGF."
+    },
+    {
+      "target_id": "PD_L1",
+      "name": "Human Programmed Cell Death 1 Ligand 1 (PD-L1, IgV domain)",
+      "file": "targets/PD_L1.pdb",
+      "receptor_chain": "A",
+      "residue_range": "18-132",
+      "num_residues": 115,
+      "biological_objective": "Design de novo linear and head-to-tail cyclic peptide binders (5–20 aa, standard L-amino acids excluding Cys) that block the interaction between PD-L1 and its native receptor PD-1."
+    }
+  ]
+}
