@@ -7,7 +7,7 @@
 - **`workspace/`（唯一挂载为容器内 `/workspace` 下发给被测模型）**：
   - `workspace/TASK.md`：纯净版任务题面（仅保留科学问题、范围与配额边界、阶段一评估口径与原始证据交付接口；已移除旧版草稿、Rubric、Cao 2022 文献、参考表位清单及全部阶段二评分阈值与终点公式）。
   - `workspace/input/README.md`：输入与输出路径说明。
-  - `workspace/input/budget_and_quotas.yaml`：统一配额与协议配置（阶段一默认每表位生成 **100 个短片段**及 `< 1.5 / 2.0 Å`、`5.0 Å` 阶段一口径；阶段二仅含靶点列表、默认每靶点每方法 **200 个候选**、**3 seed × 5 sample**、`tmol` `beta_nov_2016` $\ge 40$ 次 / `beta_nov_2016_cart` $\ge 200$ 次，不含任何阶段二通过阈值）。
+  - `workspace/input/budget_and_quotas.yaml`：统一配额与协议配置（阶段一默认每表位生成 **100 个短片段**及 `< 1.5 / 2.0 Å`、`5.0 Å` 阶段一口径；阶段二仅含靶点列表、默认每靶点每方法 **200 个候选**、**3 seed × 5 sample**、`tmol` `beta_nov_2016` `nstruct` $\ge 40$ / `beta_nov_2016_cart` `nstruct` $\ge 200$，不含任何阶段二通过阈值）。
   - `workspace/input/environment_manifest.yaml`：去泄题版可用软件环境与权重路径模板（不含“用途/操作指南”列）。
   - `workspace/input/targets/`：三个阶段二测试靶点的纯净单受体结构（`IL7Ra.pdb`、`TrkA.pdb`、`PD_L1.pdb`）与 `targets_manifest.json`（仅保留目标受体单链与原始作者残基编号，已清除天然配体链、溶剂及来源 PDB ID）。
   - `workspace/submission/`：预创建的目标提交目录骨架（`code/`、`results/stage1/`、`results/stage2/`、`results/candidates/relaxed/`、`results/candidates/predicted/`）。

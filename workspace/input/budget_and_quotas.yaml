@@ -31,10 +31,12 @@ stage2:
     - PD_L1
   nominations_per_target_per_arm: 200
   tmol_relax:
+    protocol: "two-stage Rosetta-style relax (default minimizer iterations)"
     internal_coord_scorefxn: "beta_nov_2016"
-    internal_coord_min_iterations: 40
+    internal_coord_min_nstruct: 40
     cartesian_scorefxn: "beta_nov_2016_cart"
-    cartesian_min_iterations: 200
+    cartesian_min_nstruct: 200
+    selection_rule: "lowest_energy_sample_per_stage"
   structure_prediction:
     models:
       - AlphaFold3

@@ -9,7 +9,7 @@
   - `targets/TrkA.pdb`：人 TrkA Ig-like d5 结构域（链 `X`，残基 282–382）；功能目标：阻断 TrkA / β-NGF 互作。
   - `targets/PD_L1.pdb`：人 PD-L1 IgV 结构域（链 `A`，残基 18–132）；功能目标：阻断 PD-L1 / PD-1 互作。
   - `targets/targets_manifest.json`：上述三靶点的结构元数据与功能目标描述。
-- `budget_and_quotas.yaml`：阶段一默认片段预算（每表位默认生成 100 个短片段）、阶段二提名配额（默认每靶点每方法 200 个）、结构预测采样配额（3 seed × 5 sample）、`tmol` 弛豫力场与迭代下限及硬件预算说明。
+- `budget_and_quotas.yaml`：阶段一默认片段预算（每表位默认生成 100 个短片段）、阶段二提名配额（默认每靶点每方法 200 个）、结构预测采样配额（3 seed × 5 sample）、`tmol` 两阶段弛豫力场与独立结构数下限（`nstruct`）及硬件预算说明。
 - `environment_manifest.yaml`：当前计算节点已安装的 Conda 环境、软件版本与权重路径清单（注：本地未预置 627 GB 全量 `AlphaFold3` mmCIF 数据库）。
 
 ## 输出位置
